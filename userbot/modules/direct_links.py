@@ -78,7 +78,7 @@ def gdrive(url: str) -> str:
     try:
         link = re.findall(r'\bhttps?://drive\.google\.com\S+', url)[0]
     except IndexError:
-        reply = "`No Google drive links found`\n"
+        reply = "`No Google drive links found.`\n"
         return reply
     file_id = ''
     reply = ''
@@ -97,7 +97,7 @@ def gdrive(url: str) -> str:
         if 'accounts.google.com' in dl_url:  # non-public file
             reply += '`Link is not public!`\n'
             return reply
-        name = 'Direct Download Link'
+        name = 'Direct download link'
     except KeyError:
         # In case of download warning page
         page = BeautifulSoup(download.content, 'lxml')
@@ -186,7 +186,7 @@ def sourceforge(url: str) -> str:
         reply = "`No SourceForge links found`\n"
         return reply
     file_path = re.findall(r'files(.*)/download', link)[0]
-    reply = f"Mirrors for __{file_path.split('/')[-1]}__\n"
+    reply = f"Mirrors for `{file_path.split('/')[-1]}`\n"
     project = re.findall(r'projects?/(.*?)/files', link)[0]
     mirrors = f'https://sourceforge.net/settings/mirror_choices?' \
         f'projectname={project}&filename={file_path}'

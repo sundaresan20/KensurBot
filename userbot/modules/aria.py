@@ -118,7 +118,7 @@ async def remove_all(event):
         subprocess_run("aria2p remove-all")
     await event.edit("`Clearing on-going downloads... `")
     await sleep(2.5)
-    await event.edit("`Successfully cleared all downloads.`")
+    await event.edit("`Cleared all downloads.`")
     await sleep(2.5)
 
 
@@ -128,7 +128,7 @@ async def pause_all(event):
     await event.edit("`Pausing downloads...`")
     aria2.pause_all(force=True)
     await sleep(2.5)
-    await event.edit("`Successfully paused on-going downloads.`")
+    await event.edit("`Paused on-going downloads.`")
     await sleep(2.5)
 
 
@@ -155,7 +155,7 @@ async def show_all(event):
                         download.status) + "\nETA:  " + str(
                             download.eta_string()) + "\n\n"
     if len(msg) <= 4096:
-        await event.edit("`On-going Downloads: `\n" + msg)
+        await event.edit("`On-going downloads: `\n" + msg)
         await sleep(5)
         await event.delete()
     else:
@@ -218,17 +218,17 @@ async def check_progress_for_dl(gid, event, previous):
                     f"`Name`: `{file.name}`\n"
                     f"`Size`: `{file.total_length_string()}`\n"
                     f"`Path`: `{TEMP_DOWNLOAD_DIRECTORY + file.name}`\n"
-                    "`Resp`: **OK** - Successfully downloaded..."
+                    "`Resp`: **OK** - Successfully downloaded."
                 )
         except Exception as e:
             if " not found" in str(e) or "'file'" in str(e):
-                await event.edit("Download Canceled :\n`{}`".format(file.name))
+                await event.edit("Download canceled :\n`{}`".format(file.name))
                 await sleep(2.5)
                 return await event.delete()
             elif " depth exceeded" in str(e):
                 file.remove(force=True)
                 await event.edit(
-                    "Download Auto Canceled :\n`{}`\nYour Torrent/Link is Dead."
+                    "Download Auto Canceled :\n`{}`\nYour torrent/link is dead."
                     .format(file.name))
 
 

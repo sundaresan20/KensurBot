@@ -64,9 +64,9 @@ async def log(log_text):
             await bot.send_message(BOTLOG_CHATID, textx)
         else:
             return await log_text.edit("`What am I supposed to log?`")
-        await log_text.edit("`Logged Successfully`")
+        await log_text.edit("`Logged successfully.`")
     else:
-        await log_text.edit("`This feature requires Logging to be enabled!`")
+        await log_text.edit("`This feature requires logging to be enabled.`")
     await sleep(2)
     await log_text.delete()
 
@@ -74,7 +74,7 @@ async def log(log_text):
 @register(outgoing=True, pattern="^.kickme$")
 async def kickme(leave):
     """ Basically it's .kickme command """
-    await leave.edit("Nope, no, no, I go away")
+    await leave.edit("`Imma nope the fuck outta here`")
     await leave.client.kick_participant(leave.chat_id, 'me')
 
 
@@ -84,9 +84,9 @@ async def unmute_chat(unm_e):
     try:
         from userbot.modules.sql_helper.keep_read_sql import unkread
     except AttributeError:
-        return await unm_e.edit('`Running on Non-SQL Mode!`')
+        return await unm_e.edit('`Error: Running on non-SQL mode.`')
     unkread(str(unm_e.chat_id))
-    await unm_e.edit("```Unmuted this chat Successfully```")
+    await unm_e.edit("`Unmuted this chat successfully.`")
     await sleep(2)
     await unm_e.delete()
 
@@ -97,7 +97,7 @@ async def mute_chat(mute_e):
     try:
         from userbot.modules.sql_helper.keep_read_sql import kread
     except AttributeError:
-        return await mute_e.edit("`Running on Non-SQL mode!`")
+        return await mute_e.edit("`Error: Running on non-SQL mode.`")
     await mute_e.edit(str(mute_e.chat_id))
     kread(str(mute_e.chat_id))
     await mute_e.edit("`Shush! This chat will be silenced!`")

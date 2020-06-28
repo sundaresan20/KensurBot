@@ -12,14 +12,14 @@ async def _(fry):
     if fry.fwd_from:
         return
     if not fry.reply_to_msg_id:
-        await fry.edit("`Reply to any user message photo...`")
+        await fry.edit("`Reply to an image!`")
         return
     reply_message = await fry.get_reply_message()
     if not reply_message.media:
-        await fry.edit("`No image found to fry...`")
+        await fry.edit("`Reply to an image!`")
         return
     if reply_message.sender.bot:
-        await fry.edit("`Reply to actual user...`")
+        await fry.edit("`Reply to an actual user!`")
         return
     chat = "@image_deepfrybot"
     message_id_to_reply = fry.message.reply_to_msg_id
@@ -38,10 +38,10 @@ async def _(fry):
             """ - don't spam notif - """
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await fry.reply("`Please unblock` @image_deepfrybot`...`")
+            await fry.reply("`Unblock `@image_deepfrybot` and try again.`")
             return
         if response.text.startswith("Forward"):
-            await fry.edit("`Please disable your forward privacy setting...`")
+            await fry.edit("`Please disable your forward privacy setting.`")
         else:
             downloaded_file_name = await fry.client.download_media(
                 response.media,
